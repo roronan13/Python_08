@@ -60,5 +60,16 @@ if __name__ == "__main__":
 thanks for creating one before installing packages.")
         sys.exit()
 
-    print(f"{installed_with_poetry()}")
+    if installed_with_poetry():
+        print("We are in a Poetry virtual env !")
+        print(f"({sys.executable})\n")
+    else:
+        print("We are in a python virtual env using pip !")
+        print(f"({sys.executable})\n")
+
     show_packages()
+
+    if importlib.util.find_spec("numpy") is None or importlib.util.find_spec("matplotlib") is None or importlib.util.find_spec("pandas") is None:
+        sys.exit()
+
+    print("  == Analyzing Matrix data ... ==  ")
