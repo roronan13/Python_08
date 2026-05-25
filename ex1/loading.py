@@ -21,7 +21,6 @@ def show_packages() -> None:
     else:
         print("[ERROR] pandas module not found. Program will stop.")
         all_installed = False
-        # sys.exit()
 
     if importlib.util.find_spec("matplotlib"):
         try:
@@ -33,7 +32,6 @@ def show_packages() -> None:
     else:
         print("[ERROR] matplotlib module not found. Program will stop.")
         all_installed = False
-        # sys.exit()
 
     if importlib.util.find_spec("numpy"):
         try:
@@ -45,7 +43,6 @@ def show_packages() -> None:
     else:
         print("[ERROR] numpy module not found. Program will stop.")
         all_installed = False
-        # sys.exit()
 
     if all_installed is False:
         if installed_with_poetry():
@@ -73,3 +70,5 @@ thanks for creating one before installing packages.")
         sys.exit()
 
     print("  == Analyzing Matrix data ... ==  ")
+    data_size: int = 1000
+    timestamps = numpy.arange(data_size)
