@@ -60,4 +60,5 @@ if __name__ == "__main__":
 thanks for creating one before installing packages.")
         sys.exit()
 
+    print(f"{installed_with_poetry()}")
     show_packages()
