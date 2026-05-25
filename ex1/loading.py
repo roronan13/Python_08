@@ -1,0 +1,63 @@
+import importlib.util
+import importlib.metadata
+import sys
+
+
+def installed_with_poetry() -> bool:
+    return "poetry" in sys.executable.lower()
+
+
+def show_packages() -> None:
+    all_installed: bool = True
+
+    print("   -- CHECKING DEPENDENCIES --   ")
+    if importlib.util.find_spec("pandas"):
+        try:
+            import pandas
+            print(f"[OK] pandas ({importlib.metadata.version('pandas')}) - Data manipulation ready.")
+        except ImportError as e:
+            print(f"{e} : pandas not imported. Program exited.")
+            sys.exit()
+    else:
+        print("[ERROR] pandas module not found. Program will stop.")
+        all_installed = False
+        # sys.exit()
+
+    if importlib.util.find_spec("matplotlib"):
+        try:
+            import matplotlib
+            print(f"[OK] matplotlib ({importlib.metadata.version('matplotlib')}) - Visualization ready.")
+        except ImportError as e:
+            print(f"{e} : matplotlib not imported. Program exited.")
+            sys.exit()
+    else:
+        print("[ERROR] matplotlib module not found. Program will stop.")
+        all_installed = False
+        # sys.exit()
+
+    if importlib.util.find_spec("numpy"):
+        try:
+            import numpy
+            print(f"[OK] numpy ({importlib.metadata.version('numpy')}) - Numerical computation ready.")
+        except ImportError as e:
+            print(f"{e} : numpy not imported. Program exited.")
+            sys.exit()
+    else:
+        print("[ERROR] numpy module not found. Program will stop.")
+        all_installed = False
+        # sys.exit()
+
+    if all_installed is False:
+        if installed_with_poetry():
+            print("   (You must run <poetry install> with every module present in pyproject.toml)")
+        else:
+            print("   (You must run <pip install -r requirements.txt> with every module present in requirements.txt)")
+
+
+if __name__ == "__main__":
+    if sys.prefix == sys.base_prefix:
+        print("You're not in a virtual environment, \
+thanks for creating one before installing packages.")
+        sys.exit()
+
+    show_packages()
