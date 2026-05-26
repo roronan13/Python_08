@@ -8,16 +8,17 @@ if __name__ == "__main__":
         from dotenv import load_dotenv
     except ImportError as e:
         print(f"{e} : Can't import load_dotenv from dotenv.")
-        print("Program will exit. Try <pip install python-dotenv> (in a virtual env if possible).")
+        print("Program will exit. Try <pip install python-dotenv> \
+(in a virtual env if possible).")
         sys.exit()
 
     load_dotenv()
 
-    mode: str = os.getenv("MATRIX_MODE")
-    database_url: str = os.getenv("DATABASE_URL")
-    api_key: str = os.getenv("API_KEY")
-    log_level: str = os.getenv("LOG_LEVEL")
-    zion_endpoint: str = os.getenv("ZION_ENDPOINT")
+    mode = os.getenv("MATRIX_MODE")
+    database_url = os.getenv("DATABASE_URL")
+    api_key = os.getenv("API_KEY")
+    log_level = os.getenv("LOG_LEVEL")
+    zion_endpoint = os.getenv("ZION_ENDPOINT")
 
     missing_variables: list[str] = []
     if mode is None:
@@ -33,9 +34,9 @@ if __name__ == "__main__":
 
     if len(missing_variables):
         print("WARNING : some variables are not set : ")
-        print(f"{missing_variables}")
+        print(f"{missing_variables}\n")
 
-    print("\n  Configuration loaded : ")
+    print("  Configuration loaded : ")
     print(f"Mode : {mode}")
     print(f"Database : {database_url}")
     print(f"API Access : {api_key}")
@@ -43,8 +44,8 @@ if __name__ == "__main__":
     print(f"Zion Network : {zion_endpoint}")
 
     if mode == "development":
-        print("You're in development mode !")
+        print("\nYou're in development mode !")
     elif mode == "production":
-        print("You're are in production mode !")
+        print("\nYou're in production mode !")
     else:
-        print(f"Careful the mode you're in is weird ({mode}).")
+        print(f"\nCareful the mode you're in is weird ({mode}).")
